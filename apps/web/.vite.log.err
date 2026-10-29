@@ -1,0 +1,6 @@
+[2m22:29:53[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/actions?limit=20[39m
+Error: connect ECONNREFUSED 127.0.0.1:9959
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+[2m22:29:53[22m [31m[1m[vite][22m[39m [31mhttp proxy error: /api/v1/auth/registration[39m
+Error: connect ECONNREFUSED 127.0.0.1:9959
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)

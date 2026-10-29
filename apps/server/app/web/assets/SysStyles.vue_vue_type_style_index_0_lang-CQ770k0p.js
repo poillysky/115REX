@@ -1,0 +1,1 @@
+import{d as e,c as t,R as n,o,h as c}from"./index-BRN8-VeP.js";const r={class:"panel"},l=e({__name:"SettingsPanel",setup(a){return(s,_)=>(o(),t("div",r,[n(s.$slots,"default",{},void 0,!0)]))}}),i=c(l,[["__scopeId","data-v-40f9cc33"]]),p={class:"sys"},u=e({__name:"SysStyles",setup(a){return(s,_)=>(o(),t("div",p,[n(s.$slots,"default")]))}});export{i as S,u as _};

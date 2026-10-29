@@ -1,0 +1,17 @@
+name: brand
+description: 115REX brand SVG assets (symbol / app icon).
+publish_to: "none"
+version: 1.0.0
+
+environment:
+  sdk: ^3.5.0
+  flutter: ">=3.24.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+flutter:
+  assets:
+    - svg/115rex-symbol-gradient.svg
+    - svg/115rex-app-icon.svg

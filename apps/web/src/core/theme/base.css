@@ -1,0 +1,370 @@
+/* 全局基础样式。色值 / 间距 / 圆角一律来自 tokens.generated.css，禁止裸值（docs/08 §5 第 12 条）。 */
+
+@import './tokens.generated.css';
+
+/* 布局与材质派生值：全部由 Token 推导，不引入新的品牌色。
+   顶栏 / 侧栏 / 内容宽度只在这里定一次，外壳与页面都引用同一组变量。 */
+:root {
+  --topbar-height: 60px;
+  /* 宽屏常驻侧栏宽度（docs/03 §3） */
+  --sidebar-width: 216px;
+  --content-wide: 1280px;
+  --content-medium: 1000px;
+  --content-narrow: 960px;
+  --color-border-soft: color-mix(in srgb, var(--color-separator) 72%, transparent);
+  /* 卡片顶部的一线高光：浅色下提亮表面，深色下只留极淡的分层提示 */
+  --highlight-line: rgb(255 255 255 / 0.62);
+  /* 面板边框：与弹窗 dialog__card 同一配方，全站卡片/浮层共用 */
+  --panel-border: color-mix(in srgb, var(--highlight-line) 55%, var(--color-border-soft));
+  /* 卡内分隔用实色 separator，比外框更干净 */
+  --panel-divider: var(--color-separator);
+  /*
+    三层舞台（docs/02 §5.2）：
+    Level 0 内容台 = background；
+    Chrome 导航架 = 实色 surface（顶栏 / 侧栏），与内容台拉开；
+    Level 1 卡片 = surface 落在内容台上。
+    浮层弹窗仍可用半透明 + blur。
+  */
+  --chrome-surface: var(--color-surface);
+  --chrome-blur: blur(24px) saturate(1.25);
+  --chrome-float: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  /* 顶栏压住内容台；侧栏把内容台推开 */
+  --shadow-chrome-top:
+    0 1px 0 var(--highlight-line),
+    0 1px 2px color-mix(in srgb, var(--color-text-primary) 4%, transparent),
+    0 8px 24px color-mix(in srgb, var(--color-text-primary) 5%, transparent);
+  --shadow-chrome-side:
+    1px 0 0 var(--panel-border),
+    8px 0 24px color-mix(in srgb, var(--color-text-primary) 4%, transparent);
+  /* Level 3 Overlay 浮层阴影；Level 1/2 内容卡默认无外投影（docs/02 §5.2） */
+  --shadow-overlay:
+    0 1px 2px color-mix(in srgb, var(--color-text-primary) 5%, transparent),
+    0 16px 40px color-mix(in srgb, var(--color-text-primary) 10%, transparent),
+    0 28px 64px color-mix(in srgb, var(--color-primary) 8%, transparent);
+  /* 内容卡：顶边高光，质感对齐弹窗内嵌面 */
+  --shadow-card: inset 0 1px 0 var(--highlight-line);
+  /* 焦点环：主色半透明，避免实色蓝框抢注意力 */
+  --focus-ring-color: color-mix(in srgb, var(--color-primary) 32%, transparent);
+}
+
+:root[data-theme='dark'] {
+  --highlight-line: rgb(255 255 255 / 0.06);
+  --color-border-soft: color-mix(in srgb, var(--color-separator) 78%, transparent);
+  --panel-border: color-mix(in srgb, var(--highlight-line) 40%, var(--color-border-soft));
+  --chrome-surface: var(--color-surface);
+  --chrome-float: color-mix(in srgb, var(--color-surface) 90%, transparent);
+  --focus-ring-color: color-mix(in srgb, var(--color-primary) 42%, transparent);
+  --shadow-chrome-top:
+    0 1px 0 var(--highlight-line),
+    0 1px 2px color-mix(in srgb, #000 40%, transparent),
+    0 10px 28px color-mix(in srgb, #000 45%, transparent);
+  --shadow-chrome-side:
+    1px 0 0 var(--panel-border),
+    10px 0 28px color-mix(in srgb, #000 40%, transparent);
+  --shadow-overlay:
+    0 1px 2px color-mix(in srgb, #000 35%, transparent),
+    0 18px 48px color-mix(in srgb, #000 45%, transparent),
+    0 28px 64px color-mix(in srgb, var(--color-primary) 12%, transparent);
+  --shadow-card: inset 0 1px 0 var(--highlight-line);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+/* 页面底色是 Level 0 的环境面：极淡的品牌色氛围光，让大面积留白不死板。
+   不参与内容层级，也不铺到卡片上（docs/02 §3.1.1 / §6.1）。 */
+body {
+  margin: 0;
+  background-color: var(--color-background);
+  /* 环境氛围：顶部品牌柔光，气质对齐登录页，但不铺 brandGradient（docs/02 §3.1.1） */
+  background-image:
+    radial-gradient(
+      1200px 640px at 18% -18%,
+      color-mix(in srgb, var(--color-primary) 7%, transparent),
+      transparent 66%
+    ),
+    radial-gradient(
+      920px 520px at 96% -4%,
+      color-mix(in srgb, var(--color-primary-subtle) 58%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      740px 420px at 70% 108%,
+      color-mix(in srgb, var(--color-primary) 4%, transparent),
+      transparent 70%
+    );
+  background-attachment: fixed;
+  color: var(--color-text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  font-size: var(--font-body-size);
+  font-weight: var(--font-body-weight);
+  letter-spacing: var(--font-body-tracking);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+:root[data-theme='dark'] body {
+  background-image:
+    radial-gradient(
+      1200px 680px at 10% -16%,
+      color-mix(in srgb, var(--color-primary) 16%, transparent),
+      transparent 62%
+    ),
+    radial-gradient(
+      920px 520px at 100% -4%,
+      color-mix(in srgb, var(--color-primary) 9%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      740px 420px at 68% 110%,
+      color-mix(in srgb, var(--color-primary) 6%, transparent),
+      transparent 72%
+    );
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--font-heading1-size);
+  font-weight: var(--font-heading1-weight);
+  letter-spacing: var(--font-heading1-tracking);
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: var(--font-heading2-size);
+  font-weight: var(--font-heading2-weight);
+  letter-spacing: var(--font-heading2-tracking);
+  line-height: 1.25;
+}
+
+h3 {
+  font-size: var(--font-heading3-size);
+  font-weight: var(--font-heading3-weight);
+  letter-spacing: var(--font-heading3-tracking);
+  line-height: 1.35;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+}
+
+/* 浏览器原生表面也要跟着主题走：选区、光标、占位符、滚动条（craft-floor Verify） */
+::selection {
+  background: var(--color-primary-subtle);
+  color: var(--color-text-primary);
+}
+
+body {
+  caret-color: var(--color-primary);
+}
+
+::placeholder {
+  color: var(--color-text-tertiary);
+  opacity: 1;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+input {
+  font: inherit;
+  color: inherit;
+}
+
+/* 焦点可见：必须有环，但用半透明主色，避免实色蓝框抢内容（docs/03 §7） */
+:focus-visible {
+  outline: 2px solid var(--focus-ring-color);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* 系统操作图标：Phosphor 字形，单色跟随文字色（docs/02 §7.2） */
+.icon {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  fill: currentColor;
+  stroke: none;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+/* 表单输入唯一实现（docs/02 §11）：登录页、账号页、系统页共用，页面不再各写一套。
+   焦点环继承全局 :focus-visible，不额外 outline: none。 */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space1);
+  min-width: 0;
+}
+
+.field__label {
+  font-size: var(--font-caption-size);
+  font-weight: var(--font-label-weight);
+  color: var(--color-text-secondary);
+}
+
+/* input / select / textarea 同一套表面：高度、圆角、边色、焦点态保持一致 */
+.field__input,
+.field__select,
+.field__textarea {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--panel-border);
+  background-color: var(--color-surface-secondary);
+  font: inherit;
+  font-size: var(--font-label-size);
+  color: var(--color-text-primary);
+  transition:
+    border-color var(--duration-micro) ease,
+    background-color var(--duration-micro) ease,
+    box-shadow var(--duration-micro) ease;
+}
+
+.field__input,
+.field__select {
+  height: 40px;
+  padding: 0 var(--space3);
+}
+
+.field__textarea {
+  min-height: 120px;
+  padding: 10px var(--space3);
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.field__input::placeholder,
+.field__textarea::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+/* 原生 select 去掉系统箭头，换成与输入框同系的自定义 chevron */
+.field__select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 36px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.5 4.25 6 7.75l3.5-3.5' stroke='%236B7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+}
+
+:root[data-theme='dark'] .field__select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.5 4.25 6 7.75l3.5-3.5' stroke='%2398989D' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.field__input:hover:not(:disabled),
+.field__select:hover:not(:disabled),
+.field__textarea:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--color-text-tertiary) 55%, var(--panel-border));
+}
+
+.field__input:focus-visible,
+.field__select:focus-visible,
+.field__textarea:focus-visible {
+  background-color: var(--color-surface);
+  border-color: color-mix(in srgb, var(--color-primary) 36%, var(--panel-border));
+  outline-color: var(--focus-ring-color);
+  box-shadow: inset 0 1px 0 var(--highlight-line);
+}
+
+/* 禁用态用中性面 + 次要文字，不整体降透明度 */
+.field__input:disabled,
+.field__select:disabled,
+.field__textarea:disabled {
+  background-color: var(--color-surface-secondary);
+  border-color: transparent;
+  color: var(--color-text-secondary);
+  cursor: not-allowed;
+}
+
+.field__select:disabled {
+  background-image: none;
+}
+
+.field__hint {
+  font-size: var(--font-caption-size);
+  color: var(--color-text-secondary);
+}
+
+.field__hint--error {
+  color: var(--color-danger);
+}
+
+.field__hint--ok {
+  color: var(--color-success);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+/* 滚动条克制，不抢内容 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-separator);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

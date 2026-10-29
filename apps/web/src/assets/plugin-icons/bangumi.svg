@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="18 4 92 112" role="img" aria-label="Bangumi">
+  <defs>
+    <linearGradient id="bgm" x1="22" y1="12" x2="106" y2="108" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F5288A"/>
+      <stop offset="100%" stop-color="#FF6BB5"/>
+    </linearGradient>
+  </defs>
+  <path
+    fill="url(#bgm)"
+    d="M22 30c0-9.941 8.059-18 18-18h48c9.941 0 18 8.059 18 18v50c0 9.941-8.059 18-18 18H54l-18 14 4.5-14H40c-9.941 0-18-8.059-18-18Z"
+  />
+  <path fill="url(#bgm)" d="M52 7h24l7 14H45l7-14z"/>
+  <path fill="#A0A7B0" d="M56.5 10.5h15l3.2 7.5H53.3l3.2-7.5z"/>
+  <rect x="32" y="34" width="64" height="50" rx="11" fill="#fff"/>
+  <path fill="#F5288A" d="M46.5 46.2 56.8 54l-10.3 7.8 4 3.4L64 55.6 50.5 42.8l-4 3.4zm35 0-4-3.4L64 55.6l13.5 9.6 4-3.4L71.2 54l10.3-7.8z"/>
+  <path fill="#F5288A" d="M64 61.2 55.8 74h16.4L64 61.2z"/>
+  <g fill="none" stroke="#F5288A" stroke-width="3.4" stroke-linecap="round">
+    <path d="M38 67.5h15M38 74h15M75 67.5h15M75 74h15"/>
+  </g>
+</svg>

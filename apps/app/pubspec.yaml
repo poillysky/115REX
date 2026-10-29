@@ -1,0 +1,30 @@
+name: rex_app
+description: 115REX Flutter client (iOS-first, Cupertino).
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  go_router: ^16.0.0
+  provider: ^6.1.5
+  http: ^1.5.0
+  shared_preferences: ^2.5.3
+  phosphor_flutter:
+    path: ../../packages/phosphor_flutter
+  brand:
+    path: ../../packages/brand
+  flutter_svg: ^2.0.17
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: false

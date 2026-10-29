@@ -1,0 +1,60 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- 后端本地数据 ----
+apps/server/.env
+apps/server/data/
+apps/server/logs/
+
+# ---- Node / Web ----
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.local
+npm-debug.log*
+
+# ---- Flutter / App ----
+.dart_tool/
+.packages
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+ios/Pods/
+ios/.symlinks/
+
+# ---- 编辑器 / 系统 ----
+.idea/
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+
+# ---- 本地日志 / 临时 ----
+.backend.log
+.backend.log.err
+.emulator-launch.log
+.emulator-launch.log.err
+_tmp_mp/
+.screenshots/
+apps/server/_tmp_*.py
+packages/phosphor_tmp/
+skills-lock.json
+*.corrupt-bak
+*.pre-rewrite-bak
+*.bak
+
+# ---- 编辑器 skill 缓存（非产品源码）----
+.trae/
+.trae-cn/
+.taste-skill/
+
+# ---- 上游参考克隆（体积大，不入库）----
+refs/moviepilot/

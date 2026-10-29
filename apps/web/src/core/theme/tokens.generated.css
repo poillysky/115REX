@@ -1,0 +1,155 @@
+/* 由 tools/generate_tokens.py 从 packages/design-tokens/tokens.json 生成，不要手改。 */
+
+/* 主题切换的唯一入口（docs/02 §3.4）：data-theme=light|dark，data-accent=<主题 key> */
+:root { color-scheme: light; }
+:root[data-theme='dark'] { color-scheme: dark; }
+
+:root,
+:root[data-theme='light'] {
+  --color-background: #F3F4F6;
+  --color-surface: #FFFFFF;
+  --color-surface-secondary: #F6F7F9;
+  --color-primary: #176BFF;
+  --color-primary-subtle: #E0F2FE;
+  --color-brand-violet: #8B5CF6;
+  --color-on-primary: #FFFFFF;
+  --color-text-primary: #171A22;
+  --color-text-secondary: #6B7280;
+  --color-text-tertiary: #6E757F;
+  --color-separator: #E5E8EE;
+  --color-success: #16845B;
+  --color-warning: #B96B08;
+  --color-danger: #D83B45;
+}
+:root[data-theme='dark'] {
+  --color-background: #000000;
+  --color-surface: #1C1C1E;
+  --color-surface-secondary: #2C2C2E;
+  --color-primary: #3D8BFF;
+  --color-primary-subtle: #0E1B2E;
+  --color-brand-violet: #A57BFF;
+  --color-on-primary: #FFFFFF;
+  --color-text-primary: #F5F5F7;
+  --color-text-secondary: #98989D;
+  --color-text-tertiary: #8E8E93;
+  --color-separator: #38383A;
+  --color-success: #2FBF85;
+  --color-warning: #E8A030;
+  --color-danger: #FF5F63;
+}
+
+:root[data-theme='light'][data-accent='graphite'] {
+  --color-primary: #3A3F4A;
+  --color-primary-subtle: #EDEFF2;
+  --color-on-primary: #FFFFFF;
+}
+
+:root[data-theme='dark'][data-accent='graphite'] {
+  --color-primary: #C9CDD4;
+  --color-primary-subtle: #2A2D33;
+  --color-on-primary: #171A22;
+}
+
+:root[data-theme='light'][data-accent='teal'] {
+  --color-primary: #0E7A6E;
+  --color-primary-subtle: #DDF3EF;
+  --color-on-primary: #FFFFFF;
+}
+
+:root[data-theme='dark'][data-accent='teal'] {
+  --color-primary: #3FC9B4;
+  --color-primary-subtle: #0C2420;
+  --color-on-primary: #08120F;
+}
+
+:root[data-theme='light'][data-accent='violet'] {
+  --color-primary: #6A46D6;
+  --color-primary-subtle: #EDE7FC;
+  --color-on-primary: #FFFFFF;
+}
+
+:root[data-theme='dark'][data-accent='violet'] {
+  --color-primary: #A78BFA;
+  --color-primary-subtle: #1D1633;
+  --color-on-primary: #11101C;
+}
+
+:root[data-theme='light'][data-accent='amber'] {
+  --color-primary: #A05A05;
+  --color-primary-subtle: #FBECDA;
+  --color-on-primary: #FFFFFF;
+}
+
+:root[data-theme='dark'][data-accent='amber'] {
+  --color-primary: #F0B457;
+  --color-primary-subtle: #2A1D08;
+  --color-on-primary: #191207;
+}
+
+:root[data-theme='light'][data-accent='rose'] {
+  --color-primary: #B62D5A;
+  --color-primary-subtle: #FBE4EC;
+  --color-on-primary: #FFFFFF;
+}
+
+:root[data-theme='dark'][data-accent='rose'] {
+  --color-primary: #F27198;
+  --color-primary-subtle: #2B0F1A;
+  --color-on-primary: #1A0A10;
+}
+
+
+:root {
+  --gradient-brand-soft: linear-gradient(180deg, #E0F2FE, #FFFFFF); /* taste-skill-ignore：仅供登录整屏，docs/02 §3.1.1 */
+  --gradient-brand: linear-gradient(135deg, #25C4FF 0%, #168BFF 36%, #315BFF 67%, #8B35F6 100%); /* taste-skill-ignore：品牌位唯一渐变，docs/02 §3.1.1 */
+  --brand-g1: #25C4FF;
+  --brand-g2: #168BFF;
+  --brand-g3: #315BFF;
+  --brand-g4: #8B35F6;
+  --space1: 4px;
+  --space2: 8px;
+  --space3: 12px;
+  --space4: 16px;
+  --space5: 20px;
+  --space6: 24px;
+  --space8: 32px;
+  --space10: 40px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius2xl: 28px;
+  --radius-full: 999px;
+  --duration-micro: 120ms;
+  --duration-page: 300ms;
+  --font-display-size: 32px;
+  --font-heading1-size: 30px;
+  --font-heading2-size: 22px;
+  --font-heading3-size: 18px;
+  --font-body-size: 16px;
+  --font-label-size: 15px;
+  --font-caption-size: 13px;
+  --font-display-weight: 600;
+  --font-heading1-weight: 700;
+  --font-heading2-weight: 600;
+  --font-heading3-weight: 500;
+  --font-body-weight: 400;
+  --font-label-weight: 500;
+  --font-caption-weight: 400;
+  --font-display-tracking: -0.04375em;
+  --font-heading1-tracking: -0.0375em;
+  --font-heading2-tracking: -0.028125em;
+  --font-heading3-tracking: -0.021875em;
+  --font-body-tracking: 0.0em;
+  --font-label-tracking: 0.0em;
+  --font-caption-tracking: 0.0em;
+}
+
+:root[data-theme='dark'] {
+  --gradient-brand-soft: linear-gradient(180deg, #0E1B2E, #1C1C1E); /* taste-skill-ignore：仅供登录整屏，docs/02 §3.1.1 */
+  --gradient-brand: linear-gradient(135deg, #1AA8E0 0%, #2A78E8 36%, #4A5AE8 67%, #9A55F0 100%); /* taste-skill-ignore：品牌位唯一渐变，docs/02 §3.1.1 */
+  --brand-g1: #1AA8E0;
+  --brand-g2: #2A78E8;
+  --brand-g3: #4A5AE8;
+  --brand-g4: #9A55F0;
+}
